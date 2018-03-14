@@ -13,34 +13,42 @@
     integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
     crossorigin=""></script>
     <link rel="stylesheet" href="css/map.css"/>
+    <link rel="stylesheet" href="src/L.Control.Sidebar.css" />
 </head>
-    <bodY>
+    <body>
 
         <div id="mapid"></div>
-        <div id="sidebar">
-            <h1>leaflet-sidebar</h1>
-        </div>
-          <script> 
-            var locations = [[37.4241, -122.1661, "Foster City", "blah blah"], [37.5585, -122.2711]]
+        <div id="sidebar"></div>
+            <script src="src/L.Control.Sidebar.js"></script>
+            <script> 
+            var locations = [[37.4241, -122.1661, "<h1>Stanford</h1>"], [37.5585, -122.2711, "<h1>Foster City</h1> <p>Some cool things</p>"]]
             var mymap = L.map('mapid').setView([37.5585, -122.2711], 10);
-            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox.streets',
-            accessToken: 'pk.eyJ1Ijoib25leWFuc2hpIiwiYSI6ImNqZW95Z3hxdzVneHMzMmxuYjhtaDd2eHoifQ.kK_SOwEna8uNRf0ITlkesA'
-    }).addTo(mymap);
-
-            for(let i = 0; i < locations.length; i++){ 
-                marker = new L.marker([locations[i][0], locations[i][1]]).addTo(mymap); 
-                console.log(marker); 
-            }
+                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox.streets',
+                accessToken: 'pk.eyJ1Ijoib25leWFuc2hpIiwiYSI6ImNqZW95Z3hxdzVneHMzMmxuYjhtaDd2eHoifQ.kK_SOwEna8uNRf0ITlkesA'
+            }).addTo(mymap);
 
             var sidebar = L.control.sidebar('sidebar', {
+                closeButton: true,
                 position: 'left'
+            });                
+
+            mymap.addControl(sidebar);
+
+            for(let i = 0; i < locations.length; i++){ 
+                marker = new L.marker([locations[i][0], locations[i][1]]).addTo(mymap).on('click', function() { 
+                sidebar.setContent(locations[i][2]);
+                sidebar.toggle(); 
+                console.log(marker); 
+                }) 
+            }
+            
+            mymap.on('click', function () {
+                sidebar.hide();
             });
 
-            map.addControl(sidebar);
-
         </script> 
-        </bodY>
+        </body>
 </html>
