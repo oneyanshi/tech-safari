@@ -14,6 +14,8 @@
     crossorigin=""></script>
     <link rel="stylesheet" href="css/map.css"/>
     <link rel="stylesheet" href="src/L.Control.Sidebar.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
 </head>
     <body>
         <div id="mapid"></div>
@@ -50,6 +52,12 @@
             mymap.on('click', function () {
                 sidebar.hide();
             });
+
+            // Add menu button to open sidebar with project description
+            L.easyButton('<span style="font-size: 1.5em">&quest;</span>', function() {
+                sidebar.setContent("<h1>Tech Safari</h1><img src='https://files.slack.com/files-pri/T9FTAGVM1-F9PGAND0A/screen_shot_2018-03-13_at_9.28.56_pm.png' height='162' width='360'><p>It works!</p>")
+                sidebar.toggle();
+            }).addTo(mymap);
 
         </script> 
         </body>
