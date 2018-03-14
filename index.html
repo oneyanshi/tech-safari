@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="src/L.Control.Sidebar.css" />
 </head>
     <body>
-
         <div id="mapid"></div>
         <div id="sidebar"></div>
-            <script src="src/L.Control.Sidebar.js"></script>
+        <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+        <script src="src/L.Control.Sidebar.js"></script>
             <script> 
             var locations = [[37.4241, -122.1661, "<h1>Stanford</h1>"], [37.5585, -122.2711, "<h1>Foster City</h1> <p>Some cool things</p>"]]
             var mymap = L.map('mapid').setView([37.5585, -122.2711], 10);
@@ -37,13 +37,15 @@
 
             mymap.addControl(sidebar);
 
-            for(let i = 0; i < locations.length; i++){ 
-                marker = new L.marker([locations[i][0], locations[i][1]]).addTo(mymap).on('click', function() { 
-                sidebar.setContent(locations[i][2]);
-                sidebar.toggle(); 
-                console.log(marker); 
-                }) 
-            }
+            omnivore.csv('https://github.com/oneyanshi/tech-safari/blob/master/data/data_tuesday.csv').addTo(mymap); 
+
+            // for(let i = 0; i < locations.length; i++){ 
+            //     marker = new L.marker([locations[i][0], locations[i][1]]).addTo(mymap).on('click', function() { 
+            //     sidebar.setContent(locations[i][2]);
+            //     sidebar.toggle(); 
+            //     console.log(marker); 
+            //     }) 
+            // }
             
             mymap.on('click', function () {
                 sidebar.hide();
