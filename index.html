@@ -22,10 +22,14 @@
         <script src="src/L.Control.Sidebar.js"></script>
         <script> 
 
-            // star icon defintion 
+            // icon definitions
             let starIcon = L.icon({
                 iconUrl: 'imgs/star-icon.png',
-                iconSize: [30, 30]
+                iconSize: [28, 28]
+            });
+            let pointIcon = L.icon({
+                iconUrl: 'imgs/point-icon.png',
+                iconSize: [12, 12]
             });
 
             // creating the map and setting the view
@@ -33,7 +37,7 @@
                 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
                 maxZoom: 18,
-                id: 'mapbox.streets',
+                id: 'mapbox.light',
                 accessToken: 'pk.eyJ1Ijoib25leWFuc2hpIiwiYSI6ImNqZW95Z3hxdzVneHMzMmxuYjhtaDd2eHoifQ.kK_SOwEna8uNRf0ITlkesA'
             }).addTo(map);
 
@@ -51,7 +55,8 @@
                 // do some things w/ the marker layers before adding to the map 
                 this.eachLayer(function(marker){ 
                     if(marker.toGeoJSON().properties.description == undefined){ 
-                        // if there's nothing in description, do nothing 
+                        // if there's nothing in description, set standard point icon
+                        marker.setIcon(pointIcon);
                     }else{
                         // else, set the icon to a star 
                         marker.setIcon(starIcon);
