@@ -3,9 +3,6 @@
   <head>
     <meta charset="utf-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
     integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
     crossorigin=""/>
@@ -16,14 +13,22 @@
     <link rel="stylesheet" href="src/L.Control.Sidebar.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
     <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+
 </head>
     <body>
         <div id="mapid"></div>
         <div id="sidebar"></div>
         <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
         <script src="src/L.Control.Sidebar.js"></script>
-            <script> 
-            // var locations = [[37.4241, -122.1661, "<h1>Stanford</h1>"], [37.5585, -122.2711, "<h1>Foster City</h1> <p>Some cool things</p>"]]
+        <script> 
+
+            // star icon defintion 
+            let starIcon = L.icon({
+                iconUrl: 'imgs/star-icon.png',
+                iconSize: [30, 30]
+            });
+
+            // creating the map and setting the view
             let map = L.map('mapid').setView([37.5585, -122.2711], 10);
                 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -32,21 +37,32 @@
                 accessToken: 'pk.eyJ1Ijoib25leWFuc2hpIiwiYSI6ImNqZW95Z3hxdzVneHMzMmxuYjhtaDd2eHoifQ.kK_SOwEna8uNRf0ITlkesA'
             }).addTo(map);
 
+            // creating an instance of the sidebar 
             let sidebar = L.control.sidebar('sidebar', {
                 closeButton: true,
                 position: 'left'
             });                
 
+            // attach sidebar to map 
             map.addControl(sidebar);
 
-            omnivore.csv('data/some.csv').addTo(map); 
-            // for(let i = 0; i < locations.length; i++){ 
-            //     marker = new L.marker([locations[i][0], locations[i][1]]).addTo(mymap).on('click', function() { 
-            //     sidebar.setContent(locations[i][2]);
-            //     sidebar.toggle(); 
-            //     console.log(marker); 
-            //     }) 
-            // }
+            // eat the csv file --> burps out 
+            omnivore.csv('data/some.csv').on('ready', function(layer){ 
+                // do some things w/ the marker layers before adding to the map 
+                this.eachLayer(function(marker){ 
+                    if(marker.toGeoJSON().properties.description == undefined){ 
+                        // if there's nothing in description, do nothing 
+                    }else{
+                        // else, set the icon to a star 
+                        marker.setIcon(starIcon);
+                        // then when there is a click, do this w/ the sidebar 
+                        marker.on('click', function(){ 
+                            sidebar.setContent(marker.toGeoJSON().properties.description); 
+                            sidebar.toggle(); 
+                        })
+                    }
+                })
+            }).addTo(map);
             
             map.on('click', function () {
                 sidebar.hide();
@@ -54,7 +70,9 @@
 
             // Add menu button to open sidebar with project description
             L.easyButton('<span style="font-size: 1.5em">&quest;</span>', function() {
-                sidebar.setContent("<h1>Tech Safari</h1><img src='https://files.slack.com/files-pri/T9FTAGVM1-F9PGAND0A/screen_shot_2018-03-13_at_9.28.56_pm.png' height='162' width='360'><p>It works!</p>")
+                sidebar.setContent("<h1>Tech Safari</h1>\
+                <p>On March 11, four students and their professor embarked on a trip to learn about innovation, \
+                    </p>");
                 sidebar.toggle();
             }).addTo(map);
 
