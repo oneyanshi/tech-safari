@@ -23,24 +23,23 @@
         <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
         <script src="src/L.Control.Sidebar.js"></script>
             <script> 
-            var locations = [[37.4241, -122.1661, "<h1>Stanford</h1>"], [37.5585, -122.2711, "<h1>Foster City</h1> <p>Some cool things</p>"]]
-            var mymap = L.map('mapid').setView([37.5585, -122.2711], 10);
+            // var locations = [[37.4241, -122.1661, "<h1>Stanford</h1>"], [37.5585, -122.2711, "<h1>Foster City</h1> <p>Some cool things</p>"]]
+            let map = L.map('mapid').setView([37.5585, -122.2711], 10);
                 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
                 maxZoom: 18,
                 id: 'mapbox.streets',
                 accessToken: 'pk.eyJ1Ijoib25leWFuc2hpIiwiYSI6ImNqZW95Z3hxdzVneHMzMmxuYjhtaDd2eHoifQ.kK_SOwEna8uNRf0ITlkesA'
-            }).addTo(mymap);
+            }).addTo(map);
 
-            var sidebar = L.control.sidebar('sidebar', {
+            let sidebar = L.control.sidebar('sidebar', {
                 closeButton: true,
                 position: 'left'
             });                
 
-            mymap.addControl(sidebar);
+            map.addControl(sidebar);
 
-            omnivore.csv('https://github.com/oneyanshi/tech-safari/blob/master/data/data_tuesday.csv').addTo(mymap); 
-
+            omnivore.csv('data/some.csv').addTo(map); 
             // for(let i = 0; i < locations.length; i++){ 
             //     marker = new L.marker([locations[i][0], locations[i][1]]).addTo(mymap).on('click', function() { 
             //     sidebar.setContent(locations[i][2]);
@@ -49,7 +48,7 @@
             //     }) 
             // }
             
-            mymap.on('click', function () {
+            map.on('click', function () {
                 sidebar.hide();
             });
 
@@ -57,7 +56,7 @@
             L.easyButton('<span style="font-size: 1.5em">&quest;</span>', function() {
                 sidebar.setContent("<h1>Tech Safari</h1><img src='https://files.slack.com/files-pri/T9FTAGVM1-F9PGAND0A/screen_shot_2018-03-13_at_9.28.56_pm.png' height='162' width='360'><p>It works!</p>")
                 sidebar.toggle();
-            }).addTo(mymap);
+            }).addTo(map);
 
         </script> 
         </body>
