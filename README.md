@@ -24,7 +24,7 @@ Python 2.7: ```python -m SimpleHTTPServer```
 Python 3: ```python -m http.server```
 
 ## Developers 
-James Deromedi (hardware/firmware) 
-Cedric Hermel (front-end/back-end)
-Dong Zhou (back-end)
-Yan Shi (front-end)
+* James Deromedi (hardware/firmware) 
+* Cedric Hermel (front-end/back-end)
+* Dong Zhou (back-end)
+* Yan Shi (front-end)

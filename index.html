@@ -13,8 +13,7 @@
     <link rel="stylesheet" href="src/L.Control.Sidebar.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
     <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
-    <link rel="stylesheet" href="node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css"/>
-    <script src="node_modules/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+    <link rel="stylesheet" href="leaflet.markercluster/dist/MarkerCluster.Default.css"/>
     
 </head>
     <body>
@@ -22,6 +21,7 @@
         <div id="sidebar"></div>
         <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
         <script src="src/L.Control.Sidebar.js"></script>
+        <script src="leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>        
         <script> 
 
             // icon definitions
@@ -52,6 +52,14 @@
             // attach sidebar to map 
             map.addControl(sidebar);
 
+            // Add menu button to open sidebar with project description
+            L.easyButton('<span style="font-size: 1.5em"><strong>&quest;</strong</span>', function() {
+                sidebar.setContent("<h1>Tech Safari</h1>\
+                <p>On March 11, four students and their professor embarked on a trip to learn about innovation\
+                on the west coast. </p>");
+                sidebar.toggle();
+            }).addTo(map);
+
             // create an instance of marker cluster 
             let markerGroups = L.markerClusterGroup(); 
 
@@ -81,14 +89,6 @@
             map.on('click', function () {
                 sidebar.hide();
             });
-
-            // Add menu button to open sidebar with project description
-            L.easyButton('<span style="font-size: 1.5em"><strong>&quest;</strong</span>', function() {
-                sidebar.setContent("<h1>Tech Safari</h1>\
-                <p>On March 11, four students and their professor embarked on a trip to learn about innovation\
-                on the west coast. </p>");
-                sidebar.toggle();
-            }).addTo(map);
 
         </script> 
         </body>
