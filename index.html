@@ -53,18 +53,38 @@
             // attach sidebar to map 
             map.addControl(sidebar);
 
+            // Add menu button to reset map view and zoom
+            L.easyButton({
+                states: [{
+                    icon: '<span id="info-button">&#9675;</span>',
+                    title: 'Reset view',
+                    onClick: function(){
+                        map.panTo(new L.LatLng(37.5585, -122.2711));
+                        map.setZoom(10);
+                    }
+                }]
+            }).addTo(map);
+
             // Add menu button to open sidebar with project description
-            L.easyButton('<span id="info-button">?</span>', function() {
-                sidebar.setContent("<h1>Tech Safari | Project Torus</h1>\
-                <h2>Explore with Us</h2>\
-                <p>On March 11, four students and their professor embarked on a trip to learn about innovation\
-                on the West coast during their spring break.</p><p>We visited Stanford's Product Realization Lab and explored\
-                the campus by going on a scavenger hunt. We went to an accelerator for start-ups, Oracle, met a Google engineer, and \
-                so much more on this trip–it's a bit unbelievable.</p>\ <p>There was so much to do, so much to see, all in one week. \
-                During our exploration, we collected weather data as well as our GPS data so that we can map out our adventure. \
-                </p>\
-                <img src='imgs/group-photo1.jpg'/>");
-                sidebar.toggle();
+            L.easyButton({
+                states: [{
+                    icon: '<span id="info-button">?</span>',
+                    title: 'About this project',
+                    onClick: function(){
+                        sidebar.setContent(
+                            "<h1>Tech Safari | Project Torus</h1>\
+                            <h2>Explore with Us</h2>\
+                            <p>On March 11, four students and their professor embarked on a trip to learn about innovation\
+                            on the West coast during their spring break.</p><p>We visited Stanford's Product Realization Lab and explored\
+                            the campus by going on a scavenger hunt. We went to an accelerator for start-ups, Oracle, met a Google engineer, and \
+                            so much more on this trip–it's a bit unbelievable.</p>\ <p>There was so much to do, so much to see, all in one week. \
+                            During our exploration, we collected weather data as well as our GPS data so that we can map out our adventure. \
+                            </p>\
+                            <img src='imgs/group-photo1.jpg'/>"
+                        );
+                        sidebar.show();
+                    }
+                }]
             }).addTo(map);
 
             // create an instance of marker cluster 
