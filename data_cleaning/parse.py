@@ -318,21 +318,21 @@ def cleandata(gps,environment):
     #     print items
     #
     gpsdataformat = ["Date","Time","Latitude","Longtitude","Speed"]
-    with open('gpsdata315.csv', 'wb') as g:
+    with open('gpsdata316.csv', 'wb') as g:
         writer = csv.writer(g)
         writer.writerow(gpsdataformat)
         writer.writerows(gpscleanlist)
 
     envdataformat = ["time","Tempature","Barometric_Pressure","Humidity","Gas","Altitude"]
-    with open('envdata315.csv', 'wb') as g:
+    with open('envdata316.csv', 'wb') as g:
         writer = csv.writer(g)
         writer.writerow(envdataformat)
         writer.writerows(envdatalist)
         # writer.writerows(cleangpscleanlist)
     dataformat = gpsdataformat+["Tempature","Barometric_Pressure","Humidity","Gas","Altitude"]
-    with open('data315.csv', 'wb') as g:
+    with open('data316.csv', 'wb') as g:
         writer = csv.writer(g)
         writer.writerow(dataformat)
         writer.writerows(cleanlist)
 
-cleandata("gpsdata315.txt","envdata315.txt")
+cleandata("gpsdata316.txt","envdata316.txt")
