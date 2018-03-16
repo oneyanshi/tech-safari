@@ -88,7 +88,7 @@
                         // then when there is a click, do this w/ the sidebar 
                         marker.on('click', function(){ 
                             sidebar.setContent(marker.toGeoJSON().properties.description); 
-                            sidebar.toggle(); 
+                            sidebar.show(); 
                         })
                         marker.addTo(map)
                     }
