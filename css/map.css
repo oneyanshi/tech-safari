@@ -13,3 +13,10 @@ html, body {
 .close {
     z-index: 800 !important;
 }
+
+.marker-cluster-small, .marker-cluster-medium, .marker-cluster-large {
+    background-color: rgba(66, 138, 203, 0.6);
+}
+.marker-cluster-small div, .marker-cluster-medium div, .marker-cluster-large div {
+    background-color: rgba(37, 99, 150, 0.6);
+}
