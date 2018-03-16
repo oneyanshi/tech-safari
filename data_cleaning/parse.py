@@ -212,6 +212,7 @@ def cleandata(gps,environment):
         # print time_locater_index == [2, 5]
         # print len(time) == 8
         # print time
+        n=0
         if time_locater_index == [2, 5]:
             '''
             00:00:00
@@ -219,27 +220,38 @@ def cleandata(gps,environment):
             '''
             if len(time) == 8:
                 time = time[0:2]+time[3:5]+time[6:]
-            if len(time) == 7:
+                n=n+1
+            if len(time) == 7 and n == 0:
                 time = time[0:2]+time[3:5]+'0'+time[6:]
-        if time_locater_index == [2, 4]:
+                n=n+1
+        if time_locater_index == [2, 4] and n ==0:
             '''
             00:0:00
             00:0:0
             '''
             if len(time) == 7:
                 time = time[0:2]+'0'+time[3:4]+time[5:]
-            if len(time) == 6:
+                n=n+1
+            if len(time) == 6 and n == 0:
                 time = time[0:2]+'0'+time[3:4]+'0'+time[5:]
-        if time_locater_index == [1, 4]:
+                n=n+1
+        if time_locater_index == [1, 4] and n == 0:
             '''
             0:00:00
             0:00:0
             '''
             if len(time) == 7:
+                # print time
                 time = '0'+time[0:1]+time[2:4]+time[5:]
-            if len(time) == 6:
+                n=n+1
+                # print time
+                # break
+            if len(time) == 6 and n == 0:
                 time = '0'+time[0:1]+time[2:4]+'0'+time[5:]
-        if time_locater_index == [1, 3]:
+                n=n+1
+            # print len(time)
+
+        if time_locater_index == [1, 3] and n == 0:
             '''
             0:0:00
             0:0:0
@@ -249,6 +261,8 @@ def cleandata(gps,environment):
                 time = '0'+time[0:1]+'0'+time[2:3]+time[4:]
             if len(time) == 5:
                 time = '0'+time[0:1]+'0'+time[2:3]+'0'+time[4:]
+        # print time
+
 
 
 
@@ -318,21 +332,21 @@ def cleandata(gps,environment):
     #     print items
     #
     gpsdataformat = ["Date","Time","Latitude","Longtitude","Speed"]
-    with open('gpsdata316.csv', 'wb') as g:
+    with open('gpsdata313.csv', 'wb') as g:
         writer = csv.writer(g)
         writer.writerow(gpsdataformat)
         writer.writerows(gpscleanlist)
 
     envdataformat = ["time","Tempature","Barometric_Pressure","Humidity","Gas","Altitude"]
-    with open('envdata316.csv', 'wb') as g:
+    with open('envdata313.csv', 'wb') as g:
         writer = csv.writer(g)
         writer.writerow(envdataformat)
         writer.writerows(envdatalist)
-        # writer.writerows(cleangpscleanlist)
+        writer.writerows(cleangpscleanlist)
     dataformat = gpsdataformat+["Tempature","Barometric_Pressure","Humidity","Gas","Altitude"]
-    with open('data316.csv', 'wb') as g:
+    with open('data313.csv', 'wb') as g:
         writer = csv.writer(g)
         writer.writerow(dataformat)
         writer.writerows(cleanlist)
 
-cleandata("gpsdata316.txt","envdata316.txt")
+cleandata("gpsdata313.txt","envdata313.txt")
