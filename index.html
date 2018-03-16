@@ -26,9 +26,9 @@
         <script> 
 
             // icon definitions
-            let starIcon = L.icon({
-                iconUrl: 'imgs/star-icon.png',
-                iconSize: [28, 28]
+            let specialIcon = L.icon({
+                iconUrl: 'imgs/special-icon.png',
+                iconSize: [26, 42]
             });
             let pointIcon = L.icon({
                 iconUrl: 'imgs/point-icon.png',
@@ -83,8 +83,8 @@
                         marker.setIcon(pointIcon);
                         markerGroups.addLayer(marker); 
                     }else{
-                        // else, set the icon to a star 
-                        marker.setIcon(starIcon);
+                        // else, set the icon to a special pinpoint
+                        marker.setIcon(specialIcon);
                         // then when there is a click, do this w/ the sidebar 
                         marker.on('click', function(){ 
                             sidebar.setContent(marker.toGeoJSON().properties.description); 

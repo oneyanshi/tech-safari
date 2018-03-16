@@ -15,8 +15,8 @@ html, body {
 }
 
 .marker-cluster-small, .marker-cluster-medium, .marker-cluster-large {
-    background-color: rgba(66, 138, 203, 0.6) !important;
+    background-color: rgba(66, 164, 203, 0.6) !important;
 }
 .marker-cluster-small div, .marker-cluster-medium div, .marker-cluster-large div {
-    background-color: rgba(37, 99, 150, 0.6) !important;
+    background-color: rgba(37, 125, 150, 0.6) !important;
 }
