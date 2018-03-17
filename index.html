@@ -112,8 +112,9 @@
                         marker.setIcon(pointIcon);
                         markerGroups.addLayer(marker); 
                     }else{
-                        // else, set the icon to a special pinpoint
+                        // else, set the icon to a special pinpoint and to a specific class
                         marker.setIcon(specialIcon);
+                        marker.addClass('special-marker');
                         // then when there is a click, do this w/ the sidebar 
                         marker.on('click', function(){ 
                             sidebar.setContent(marker.toGeoJSON().properties.description); 
