@@ -6,11 +6,33 @@ html, body {
     margin: 0;
 }
 
+#loader {
+    height: 100%;
+    z-index: 3000;
+    padding-top: 20%;
+    background-color: #f3f3f3;
+}
+
+#loader p {
+    text-align: center;
+}
+
+#loader-spinner {
+    margin: 0;
+    font-size: 96px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 #info-button {
     font-size: 20px;
 }
 
-.close {
+.close, .leaflet-marker-icon {
     z-index: 800 !important;
 }
 
