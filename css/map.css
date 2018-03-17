@@ -32,8 +32,8 @@ html, body {
     font-size: 20px;
 }
 
-.close, .leaflet-marker-icon {
-    z-index: 800 !important;
+.close, img .leaflet-marker-icon {
+    z-index: 1000 !important;
 }
 
 .marker-cluster-small, .marker-cluster-medium, .marker-cluster-large {
